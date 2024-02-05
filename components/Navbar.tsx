@@ -35,12 +35,12 @@ export default function Nav() {
   }
 
   return (
-    <Navbar rounded>
+    <Navbar rounded className='py-8 shadow-sm'>
       <NavbarBrand href="https://github.com/ATErcan/todo-next">
         <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">TODO APP</span>
       </NavbarBrand>
-      {user && <div className="flex md:order-2">
-        <Dropdown
+      <div className="flex md:order-2">
+        {user && <Dropdown
           arrowIcon={false}
           inline
           label={
@@ -56,9 +56,9 @@ export default function Nav() {
           <DropdownItem>Earnings</DropdownItem> */}
           {/* <DropdownDivider /> */}
           <DropdownItem onClick={handleLogout}>Sign out</DropdownItem>
-        </Dropdown>
+        </Dropdown>}
         <NavbarToggle />
-      </div>}
+      </div>
       <NavbarCollapse>
         <NavbarLink href="/" active>
           Home
