@@ -63,7 +63,7 @@ export default function Register() {
   }
 
   return (
-    <section className='min-h-screen flex justify-center items-center'>
+    <section className='min-h-calc flex justify-center items-center'>
       <form className="flex w-11/12 sm:w-[25rem] flex-col gap-4" onSubmit={handleSubmit}>
         <div>
           <div className="mb-2 block">
