@@ -3,7 +3,6 @@
 import {
   Avatar,
   Dropdown,
-  DropdownDivider,
   DropdownHeader,
   DropdownItem,
   Navbar,
@@ -68,10 +67,6 @@ export default function Nav() {
               <span className="block text-sm">{user?.username}</span>
               <span className="block truncate text-sm font-medium">{user?.email}</span>
             </DropdownHeader>
-            {/* <DropdownItem>Dashboard</DropdownItem>
-            <DropdownItem>Settings</DropdownItem>
-            <DropdownItem>Earnings</DropdownItem> */}
-            {/* <DropdownDivider /> */}
             <DropdownItem onClick={handleLogout}>Sign out</DropdownItem>
           </Dropdown>}
           <NavbarToggle />
