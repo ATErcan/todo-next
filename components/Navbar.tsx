@@ -41,7 +41,7 @@ export default function Nav() {
 
   if(user === null) {
     return (
-      <Navbar rounded className='py-6 animate-pulse shadow-sm'>
+      <Navbar rounded className='py-6 animate-pulse bg-slate-50 shadow-sm'>
         <div className='h-8 w-28 rounded-lg bg-slate-200 animate-pulse'></div>
         <ul className='flex gap-4'>
           <li className='h-6 w-16 rounded-md bg-slate-200 animate-pulse'></li>
@@ -50,7 +50,7 @@ export default function Nav() {
         </ul>
       </Navbar>
     )
-  } else if(user) {
+  } else {
     return (
       <Navbar rounded className='py-8 shadow-sm'>
         <NavbarBrand href="https://github.com/ATErcan/todo-next">
@@ -80,10 +80,12 @@ export default function Nav() {
           <NavbarLink href="/" active>
             Home
           </NavbarLink>
-          <NavbarLink href="/todos">TODOS</NavbarLink>
           {
             user ? 
-            <NavbarLink href="/add-todo">Add Todo</NavbarLink> :
+            <>
+              <NavbarLink href="/todos">TODOS</NavbarLink>
+              <NavbarLink href="/add-todo">Add Todo</NavbarLink>
+            </> :
             <>
               <NavbarLink href="/register">Register</NavbarLink>
               <NavbarLink href="/login">Login</NavbarLink>
