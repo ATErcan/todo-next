@@ -2,9 +2,10 @@
 
 import { isValidConfirmPassword, isValidEmail, isValidPassword, isValidRegisterForm, isValidUsername } from '@/utils/validation';
 import { Button, Label, TextInput } from 'flowbite-react';
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { register } from './auth/authentication';
 import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
 
 export default function Register() {
   const [formValues, setFormValues] = useState({
@@ -40,9 +41,7 @@ export default function Register() {
       repeatPassword: isValidConfirmPassword(formValues.password, formValues.repeatPassword).message
     });
 
-    // If there are no validation errors, you can proceed with form submission
     if (isValidRegisterForm(formValues)) {
-      // Perform your form submission logic here
       register(formValues).then(result => {
         if(result.success) {
           setFormValues({
@@ -51,14 +50,15 @@ export default function Register() {
             password: "",
             repeatPassword: ""
           })
+          toast.success('Registered successfully!');
           router.push('/');
+          router.refresh();
         } else {
-          console.log(result.error);
+          toast.error(result.error ?? "");
         }
       }).catch((error) => {
-        console.log(error);
+        toast.error(error);
       });
-      console.log('Form submitted successfully');
     }
   }
 

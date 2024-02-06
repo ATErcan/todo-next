@@ -11,19 +11,26 @@ export default async function TodoList() {
 
   return (
     <div className='max-w-6xl mx-auto px-4 py-8'>
-      {todos ? 
-        <Accordion>
-          {todos?.map(todo => (
-            <TodoItem
-              key={todo.id}
-              todo={todo}
-            />
-          ))}
-        </Accordion> :
+      {todos.data ?
+        (todos.data.length > 0 ?
+          <Accordion>
+            {todos.data.map(todo => (
+              <TodoItem
+                key={todo.id}
+                todo={todo}
+              />
+            ))}
+          </Accordion> :
+          <div>
+            <p>Looks like you don't have any task right now</p>
+            <Link href={"/add-todo"}>Create Todos</Link>
+          </div>
+        ) :
         <div>
-          <p>Looks like you don't have any task right now</p>
-          <Link href={"/add-todo"}>Create Todos</Link>
-        </div>
+          <p>
+            {`${todos.error} Please try again later.`}
+          </p>
+        </div>      
       }
     </div>
   )

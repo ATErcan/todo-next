@@ -4,6 +4,8 @@ import { Button, Checkbox, Label, TextInput, Textarea } from 'flowbite-react';
 import { useEffect, useState } from 'react';
 import { editTodo, getTodo, newTodo } from './todos';
 import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
+import { revalidateTag } from 'next/cache';
 
 export default function CreateTodo({ params }: { params: string[] | undefined }) {
   const [todoValues, setTodoValues] = useState({
@@ -17,6 +19,7 @@ export default function CreateTodo({ params }: { params: string[] | undefined })
   useEffect(() => {
     if(params && params.length > 1) {
       router.replace('/add-todo');
+      toast.error("Couldn't find the todo");
     } else if(params) {
       getTodo(params[0]).then(result => {
         if(result.success && result.data) {
@@ -26,12 +29,12 @@ export default function CreateTodo({ params }: { params: string[] | undefined })
             completed: result.data.is_done
           })
         } else {
-          console.log(result.error);
           router.replace('/add-todo');
+          toast.error(result.error ?? "");
         }
       }).catch((error) => {
-        console.log(error);
         router.replace('/add-todo');
+        toast.error(error);
       })
     }
   }, [])
@@ -64,11 +67,13 @@ export default function CreateTodo({ params }: { params: string[] | undefined })
             completed: false
           });
           router.push('/todos');
+          router.refresh();
+          toast.success("Todo created successfully");
         } else {
-          console.log(result.error);
+          toast.error(result.error ?? "");
         }
       }).catch((error) => {
-        console.log(error);
+        toast.error(error);
       })
     } else if(params) {
       editTodo(params[0], todoValues).then(result => {
@@ -79,11 +84,13 @@ export default function CreateTodo({ params }: { params: string[] | undefined })
             completed: false
           });
           router.push('/todos');
+          router.refresh();
+          toast.success("Todo updated successfully");
         } else {
-          console.log(result.error);
+          toast.error(result.error ?? "");
         }
       }).catch((error) => {
-        console.log(error);
+        toast.error(error);
       })
     }
   } 
