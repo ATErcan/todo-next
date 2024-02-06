@@ -66,7 +66,7 @@ export default function CreateTodo({ params }: { params: string[] | undefined })
             description: "",
             completed: false
           });
-          router.push('/todos');
+          router.push('/todos?sort=-created_date');
           router.refresh();
           toast.success("Todo created successfully");
         } else {
@@ -83,7 +83,7 @@ export default function CreateTodo({ params }: { params: string[] | undefined })
             description: "",
             completed: false
           });
-          router.push('/todos');
+          router.push('/todos?sort=-updatedDate');
           router.refresh();
           toast.success("Todo updated successfully");
         } else {
