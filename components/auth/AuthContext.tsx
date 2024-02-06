@@ -6,12 +6,12 @@ import { usePathname, useRouter } from 'next/navigation';
 import { UserInfo } from '@/lib/auth/types';
 import toast from 'react-hot-toast';
 
-export const AuthContext = createContext<{ user: UserInfo | null }>({
+export const AuthContext = createContext<{ user: UserInfo | null | undefined }>({
   user: null
 });
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [user, setUser] = useState<UserInfo | null>(null);
+  const [user, setUser] = useState<UserInfo | null | undefined>(null);
 
   const router = useRouter();
   const pathname = usePathname();
@@ -22,10 +22,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       if(user) {
         setUser(user);
       } else {
-        setUser(null);
+        setUser(undefined);
       }
     } catch (error) {
       toast.error('Failed to fetch user data');
+    } finally {
     }
   }
 

@@ -39,45 +39,58 @@ export default function Nav() {
     });
   }
 
-  return (
-    <Navbar rounded className='py-8 shadow-sm'>
-      <NavbarBrand href="https://github.com/ATErcan/todo-next">
-        <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">TODO APP</span>
-      </NavbarBrand>
-      <div className="flex md:order-2">
-        {user && <Dropdown
-          arrowIcon={false}
-          inline
-          label={
-            <Avatar placeholderInitials={user.username[0].toUpperCase()} rounded />
+  if(user === null) {
+    return (
+      <Navbar rounded className='py-6 animate-pulse shadow-sm'>
+        <div className='h-8 w-28 rounded-lg bg-slate-200 animate-pulse'></div>
+        <ul className='flex gap-4'>
+          <li className='h-6 w-16 rounded-md bg-slate-200 animate-pulse'></li>
+          <li className='h-6 w-16 rounded-md bg-slate-200 animate-pulse'></li>
+          <li className='h-6 w-16 rounded-md bg-slate-200 animate-pulse'></li>
+        </ul>
+      </Navbar>
+    )
+  } else if(user) {
+    return (
+      <Navbar rounded className='py-8 shadow-sm'>
+        <NavbarBrand href="https://github.com/ATErcan/todo-next">
+          <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">TODO APP</span>
+        </NavbarBrand>
+        <div className="flex md:order-2">
+          {user && <Dropdown
+            arrowIcon={false}
+            inline
+            label={
+              <Avatar placeholderInitials={user.username[0].toUpperCase()} rounded />
+            }
+          >
+            <DropdownHeader>
+              <span className="block text-sm">{user?.username}</span>
+              <span className="block truncate text-sm font-medium">{user?.email}</span>
+            </DropdownHeader>
+            {/* <DropdownItem>Dashboard</DropdownItem>
+            <DropdownItem>Settings</DropdownItem>
+            <DropdownItem>Earnings</DropdownItem> */}
+            {/* <DropdownDivider /> */}
+            <DropdownItem onClick={handleLogout}>Sign out</DropdownItem>
+          </Dropdown>}
+          <NavbarToggle />
+        </div>
+        <NavbarCollapse>
+          <NavbarLink href="/" active>
+            Home
+          </NavbarLink>
+          <NavbarLink href="/todos">TODOS</NavbarLink>
+          {
+            user ? 
+            <NavbarLink href="/add-todo">Add Todo</NavbarLink> :
+            <>
+              <NavbarLink href="/register">Register</NavbarLink>
+              <NavbarLink href="/login">Login</NavbarLink>
+            </>
           }
-        >
-          <DropdownHeader>
-            <span className="block text-sm">{user?.username}</span>
-            <span className="block truncate text-sm font-medium">{user?.email}</span>
-          </DropdownHeader>
-          {/* <DropdownItem>Dashboard</DropdownItem>
-          <DropdownItem>Settings</DropdownItem>
-          <DropdownItem>Earnings</DropdownItem> */}
-          {/* <DropdownDivider /> */}
-          <DropdownItem onClick={handleLogout}>Sign out</DropdownItem>
-        </Dropdown>}
-        <NavbarToggle />
-      </div>
-      <NavbarCollapse>
-        <NavbarLink href="/" active>
-          Home
-        </NavbarLink>
-        <NavbarLink href="/todos">TODOS</NavbarLink>
-        {
-          user ? 
-          <NavbarLink href="/add-todo">Add Todo</NavbarLink> :
-          <>
-            <NavbarLink href="/register">Register</NavbarLink>
-            <NavbarLink href="/login">Login</NavbarLink>
-          </>
-        }
-      </NavbarCollapse>
-    </Navbar>
-  );
+        </NavbarCollapse>
+      </Navbar>
+    );
+  }
 }
