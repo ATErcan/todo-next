@@ -26,9 +26,10 @@ export default function Nav() {
     logout().then(result => {
       if(result.success) {
         toast.success('Logged out successfully!');
+        router.push('/');
+        router.refresh();
         setTimeout(() => {
-          router.push('/');
-          router.refresh();
+          window.location.href = '/';
         }, 500);
       } else {
         toast.error(result.error);
@@ -48,7 +49,7 @@ export default function Nav() {
           arrowIcon={false}
           inline
           label={
-            <Avatar alt="User settings" img="https://flowbite.com/docs/images/people/profile-picture-5.jpg" rounded />
+            <Avatar placeholderInitials={user.username[0].toUpperCase()} rounded />
           }
         >
           <DropdownHeader>
