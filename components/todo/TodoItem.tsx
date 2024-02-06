@@ -15,7 +15,7 @@ export default function TodoItem({ todo }: { todo: Todo }): JSX.Element {
       if(result.success) {
         revalidatePath('/todos');
       } else {
-        console.log(result.error);
+        console.error(result.error);
       }
     }
   }
@@ -28,7 +28,7 @@ export default function TodoItem({ todo }: { todo: Todo }): JSX.Element {
       if(result.success) {
         revalidatePath('/todos')
       } else {
-        console.log(result.error);
+        console.error(result.error);
       }
     }
   }

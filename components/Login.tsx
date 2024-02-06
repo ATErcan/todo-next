@@ -5,6 +5,7 @@ import { Button, Label, TextInput } from 'flowbite-react';
 import { useState } from 'react';
 import { login } from './auth/authentication';
 import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
 
 export default function Login() {
   const [formValues, setFormValues] = useState({
@@ -33,7 +34,6 @@ export default function Login() {
       password: isValidPassword(formValues.password).message,
     });
 
-    // If there are no validation errors, you can proceed with form submission
     if (isValidLoginForm(formValues)) {
       login(formValues).then(result => {
         if(result.success) {
@@ -42,14 +42,13 @@ export default function Login() {
             password: ""
           })
           router.push('/');
+          toast.success('Logged in successfully!');
         } else {
-          console.log(result.error);
+          toast.error(result.error);
         }
       }).catch((error) => {
-        console.log(error);
+        toast.error(error);
       });
-
-      console.log('Form submitted successfully');
     }
   };
 
