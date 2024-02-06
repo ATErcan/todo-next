@@ -21,13 +21,13 @@ export default async function TodoList() {
               />
             ))}
           </Accordion> :
-          <div>
-            <p>Looks like you don't have any task right now</p>
-            <Link href={"/add-todo"}>Create Todos</Link>
+          <div className='text-center'>
+            <p className='mb-6 font-medium text-gray-800'>Looks like you don't have any tasks right now</p>
+            <Link href={"/add-todo"} className='bg-blue-600 text-white px-5 py-2 rounded-2xl cursor-pointer hover:bg-blue-600/90'>Create Todos</Link>
           </div>
         ) :
-        <div>
-          <p>
+        <div className='text-center'>
+          <p className='font-medium text-gray-800'>
             {`${todos.error} Please try again later.`}
           </p>
         </div>      
