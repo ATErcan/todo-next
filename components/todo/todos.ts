@@ -3,11 +3,12 @@
 import { NewTodo, Todo } from "@/lib/todo/types";
 import axios from "axios";
 import { cookies } from "next/headers";
+import { BASE_URL } from "../auth/auth";
 
 export const getAllTodos = async () => {
   const token = cookies().get('token');
   if(token) {
-    const url = "http://127.0.0.1:8000/api/todos/";
+    const url = `${BASE_URL}api/todos/`;
     try {
       const response = await axios.get(url, {
         headers: {
@@ -31,7 +32,7 @@ export const getAllTodos = async () => {
 export const newTodo = async (todo: NewTodo) => {
   const token = cookies().get('token');
   if(token) {
-    const url = "http://127.0.0.1:8000/api/todos/";
+    const url = `${BASE_URL}api/todos/`;
     try {
       const response = await axios.post(url, {
         task: todo.task,
@@ -60,7 +61,7 @@ export const newTodo = async (todo: NewTodo) => {
 export const updateTodoStatus = async (id: FormDataEntryValue, status: FormDataEntryValue) => {
   const token = cookies().get('token');
   if(token) {
-    const url = `http://127.0.0.1:8000/api/todos/${id}/`;
+    const url = `${BASE_URL}api/todos/${id}/`;
     try {
       const response = await axios.patch(url, {
         is_done: !(JSON.parse(status.toString()))
@@ -88,7 +89,7 @@ export const updateTodoStatus = async (id: FormDataEntryValue, status: FormDataE
 export const editTodo = async (id: string, todo: NewTodo) => {
   const token = cookies().get('token');
   if(token) {
-    const url = `http://127.0.0.1:8000/api/todos/${id}/`;
+    const url = `${BASE_URL}api/todos/${id}/`;
     try {
       const response = await axios.put(url, {
         task: todo.task,
@@ -118,7 +119,7 @@ export const editTodo = async (id: string, todo: NewTodo) => {
 export const getTodo = async (id: string) => {
   const token = cookies().get('token');
   if(token) {
-    const url = `http://127.0.0.1:8000/api/todos/${id}/`;
+    const url = `${BASE_URL}api/todos/${id}/`;
     try {
       const response = await axios.get(url, {
         headers: {
@@ -144,7 +145,7 @@ export const getTodo = async (id: string) => {
 export const deleteTodo = async (id: FormDataEntryValue) => {
   const token = cookies().get('token');
   if(token) {
-    const url = `http://127.0.0.1:8000/api/todos/${id}/`;
+    const url = `${BASE_URL}api/todos/${id}/`;
     try {
       const response = await axios.delete(url, {
         headers: {

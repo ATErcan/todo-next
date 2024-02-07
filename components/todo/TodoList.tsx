@@ -68,7 +68,7 @@ export default async function TodoList({ searchParams }: { searchParams: { sort?
     return (
       <div className='max-w-6xl mx-auto px-4 py-8'>
         <div className='text-center'>
-          <p className='mb-6 font-medium text-gray-800'>Looks like you don't have any tasks right now</p>
+          <p className='mb-6 font-medium text-gray-800'>Looks like you don&#39;t have any tasks right now</p>
           <Link href={"/add-todo"} className='bg-blue-600 text-white px-5 py-2 rounded-2xl cursor-pointer hover:bg-blue-600/90'>Create Todos</Link>
         </div>
       </div>

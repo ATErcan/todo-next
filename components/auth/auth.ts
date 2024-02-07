@@ -1,0 +1,1 @@
+export const BASE_URL = 'http://django-todo-app-c1:8000/';

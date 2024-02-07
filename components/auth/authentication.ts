@@ -3,6 +3,7 @@
 import { cookies } from 'next/headers'
 import axios from 'axios';
 import { LoggedInUser, LoginData, NewUser, RegisterUser, UserInfo } from '@/lib/auth/types';
+import { BASE_URL } from './auth';
 
 const cookieStore = cookies();
 
@@ -10,7 +11,7 @@ export const getUser = async () => {
   const id = cookies().get('userId');
   const token = cookies().get('token');
   if(token && id) {
-    const url = `http://127.0.0.1:8000/users/user/${id.value}/`;
+    const url = `${BASE_URL}users/user/${id.value}/`;
     try {
       const response = await axios.get(url, {
         headers: {
@@ -70,7 +71,7 @@ export async function deleteCookie(name: string) {
 
 export const register = async (userData: RegisterUser) => {  
   try {
-    const response = await axios.post('http://127.0.0.1:8000/users/register/', {
+    const response = await axios.post(`${BASE_URL}users/register/`, {
       username: userData.username,
       email: userData.email,
       password: userData.password,
@@ -92,7 +93,7 @@ export const register = async (userData: RegisterUser) => {
 
 export const login = async (loginData: LoginData) => {
   try {
-    const response = await axios.post('http://127.0.0.1:8000/auth/login/', {
+    const response = await axios.post(`${BASE_URL}auth/login/`, {
       username: loginData.username,
       password: loginData.password,
     });
@@ -114,7 +115,7 @@ export const logout = async () => {
   const token = cookies().get('token');
   try {
     const response = await axios.post(
-      'http://127.0.0.1:8000/auth/logout/',
+      `${BASE_URL}auth/logout/`,
       {},
       {
         headers: {

@@ -1,9 +1,10 @@
 import { RequestCookie } from 'next/dist/compiled/@edge-runtime/cookies';
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
+import { BASE_URL } from './components/auth/auth';
 
 async function getUser (id: RequestCookie | undefined, token: RequestCookie | undefined) {
-  const url = `http://127.0.0.1:8000/users/user/${id?.value}/`;
+  const url = `${BASE_URL}users/user/${id?.value}/`;
   try {
     const response = await fetch(url, {
       method: 'GET',
